@@ -1,3 +1,4 @@
+
 name: Node.js CI
 
 on:
@@ -8,7 +9,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 */4 * * *'
+    - cron: '0 */6 * * *'  
 
 jobs:
   build:
@@ -28,16 +29,16 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Install ffmpeg
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y ffmpeg
-
     - name: Install dependencies
-      run: |
-        npm install -g pm2
-        npm install
+      run: npm install
+
+    - name: Install FFmpeg
+      run: sudo apt-get install -y ffmpeg
 
     - name: Start application with timeout
       run: |
-        timeout 14520s npm run zokou
+        timeout 21590s npm start  # Limite l'exécution à 5h 59m 50s
+
+    - name: Save state (Optional)
+      run: |
+        ./save_state.sh
