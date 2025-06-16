@@ -36,6 +36,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y ffmpeg
 
+    - name: Update PM2 to latest version
+      run: sudo npm install -g pm2@latest
+
     - name: Start application with timeout
       run: |
         timeout 21590s npm start  # Limite l'exécution à 5h 59m 50s
